@@ -2,21 +2,20 @@ trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
 steps:
-- task: NodeTool@0
+- task: UseNode@1
   inputs:
-    versionSpec: '20.x'
-  displayName: 'Instalar Node.js'
+    version: '20.x'
 
 - script: |
     npm install
     npm run build
-  displayName: 'Instalar dependencias y hacer build'
+  displayName: 'Build project'
 
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: 'dist'
-    ArtifactName: 'landing-page'
+    ArtifactName: 'artifact'
     publishLocation: 'Container'
